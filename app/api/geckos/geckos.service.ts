@@ -18,6 +18,15 @@ export const getGeckoById = async (id: IGecko['id']) => {
 export const insertGecko = async (gecko: IGecko) => {
     const result = await execute<{ affectedRows: number }>(GeckoQueries.AddGecko, [
         gecko.name,
+        gecko.age,
+        gecko.origin,
+        gecko.color,
+        gecko.desc,
+        gecko.father,
+        gecko.mother,
+        gecko.thumbnail,
+        gecko.images,
+        gecko.ancestry
     ]);
     return result.affectedRows > 0;
 };
@@ -28,7 +37,16 @@ export const insertGecko = async (gecko: IGecko) => {
 export const updateGecko = async (gecko: IGecko) => {
     const result = await execute<{ affectedRows: number }>(GeckoQueries.UpdateGeckoById, [
         gecko.name,
-        gecko.id
+        gecko.age,
+        gecko.origin,
+        gecko.color,
+        gecko.desc,
+        gecko.father,
+        gecko.mother,
+        gecko.thumbnail,
+        gecko.images,
+        gecko.ancestry,
+        gecko.id,
     ]);
     return result.affectedRows > 0;
 };

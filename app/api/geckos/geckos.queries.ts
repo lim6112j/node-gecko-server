@@ -17,12 +17,20 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     UpdateGeckoById: `
 UPDATE geckodb.geckos
 SET name = ?,
-age =?
+age =?,
+origin=?,
+color=?,
+desc=?,
+father=?,
+mother=?,
+thumbnail=?,
+images=?,
+ancestry=?
 WHERE
 id = ?
 `,
     DeleteGeckoById: `
-UPDATE geckodb.geckos
+DELETE geckodb.geckos
 WHERE
 id = ?
 `
