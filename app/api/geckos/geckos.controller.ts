@@ -1,16 +1,6 @@
 import { Request, RequestHandler, Response } from 'express';
 import { IGetGeckoReq, IAddGeckoReq, IGecko } from './geckos.model';
 import * as GeckoService from './geckos.service';
-const TEAMS = [
-    { id: 1, name: 'Real Madrid', league: 'La Liga' },
-    { id: 2, name: 'Barcelona', league: 'La Liga' },
-    { id: 3, name: 'Manchester United', league: 'Premier League' },
-    { id: 4, name: 'Liverpool', league: 'Premier League' },
-    { id: 5, name: 'Arsenal', league: 'Premier League' },
-    { id: 6, name: 'Inter', league: 'Serie A' },
-    { id: 7, name: 'Milan', league: 'Serie A' },
-    { id: 8, name: 'Juventus', league: 'Serie A' },
-];
 
 export const getGeckos: RequestHandler = async (req: Request, res: Response) => {
     try {
@@ -22,44 +12,68 @@ export const getGeckos: RequestHandler = async (req: Request, res: Response) => 
             message: 'There was an erro when fethcing geckos'
         });
     }
-    res.send(TEAMS);
 };
 //@ts-ignore
-export const getGeckoById: RequestHandler = (req: IGetGeckoReq, res: Response) => {
-    const gecko = TEAMS.find((gecko) => gecko.id === req.params.id);
-    res.send(gecko);
+export const getGeckoById: RequestHandler = async (req: Request, res: Response) => {
+    try {
+        const gecko = await GeckoService.getGeckoById(+req.params.id);
+        res.status(200).json({ gecko });
+    } catch (error) {
+        console.error('[geckos.controller][getGeckoById][Error] ', typeof error === 'object' ? JSON.stringify(error) : error);
+        res.status(500).json({
+            message: 'There was an error when fetching gecko'
+        });
+    }
 };
-export const addGecko: RequestHandler = (req: IAddGeckoReq, res: Response) => {
-    const lastGeckoIndex = TEAMS.length - 1;
-    const lastId = TEAMS[lastGeckoIndex].id;
-    const id = lastId + 1;
-    const newGecko: IGecko = {
-        ...req.body,
-        id,
-    };
-    //TEAMS.push(newGecko);
-    res.send(newGecko);
+export const addGecko: RequestHandler = async (req: IAddGeckoReq, res: Response) => {
+    try {
+        const result = await GeckoService.insertGecko(req.body);
+
+        res.status(200).json({
+            result
+        });
+    } catch (error) {
+        console.error('[geckos.controller][addGecko][Error] ', typeof error === 'object' ? JSON.stringify(error) : error);
+        res.status(500).json({
+            message: 'There was an error when adding new gecko'
+        });
+    }
 };
 
 // @ts-ignore
-export const updateTeamById: RequestHandler = (req: IUpdateGeckoReq, res: Response) => {
-    const currentTeam = TEAMS.find((team) => team.id === +req.params.id);
-    //currentTeam.name = req.body.name || currentTeam.name;
-    //currentTeam.league = req.body.league || currentTeam.league;
+export const updateGeckoById: RequestHandler = async (req: IUpdateGeckoReq, res: Response) => {
+    try {
+        const result = await GeckoService.updateGecko({ ...req.body, id: req.params.id });
 
-    res.send({ success: true });
+        res.status(200).json({
+            result
+        });
+    } catch (error) {
+        console.error('[geckos.controller][updateGeckoById][Error] ', typeof error === 'object' ? JSON.stringify(error) : error);
+        res.status(500).json({
+            message: 'There was an error when updating gecko'
+        });
+    }
 };
 
 /**
- * deletes a team
+ * deletes a gecko
  *
  * @param req Express Request
  * @param res Express Response
  */
 // @ts-ignore
-export const deleteTeamById: RequestHandler = (req: IDeleteGeckoReq, res: Response) => {
-    const teamIndex = TEAMS.findIndex((team) => team.id === +req.params.id);
-    TEAMS.splice(teamIndex, 1);
+export const deleteGeckoById: RequestHandler = async (req: IDeleteGeckoReq, res: Response) => {
+    try {
+        const result = await GeckoService.deleteGecko(req.params.id);
 
-    res.send({ success: true });
+        res.status(200).json({
+            result
+        });
+    } catch (error) {
+        console.error('[geckos.controller][deleteGeckoById][Error] ', typeof error === 'object' ? JSON.stringify(error) : error);
+        res.status(500).json({
+            message: 'There was an error when deleting gecko'
+        });
+    }
 };

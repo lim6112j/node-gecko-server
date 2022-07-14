@@ -5,18 +5,8 @@ FROM geckodb.geckos
 `,
     GetGeckosById: `
 SELECT
-id,
-name,
-age,
-origin,
-color,
-desc,
-father,
-mother,
-thumbnail,
-images,
-ancestry
-FROM geckodb.geckos as t
+*
+FROM geckodb.geckos
 WHERE
 id = ?
 `,
