@@ -11,7 +11,7 @@ import routes from './api/routes';
 import * as MySQLConnector from './api/utils/mysql.connector';
 
 const app = express();
-const port = 3000;
+const port = 3200;
 MySQLConnector.init();
 app.use(compression());
 app.use(helmet());
