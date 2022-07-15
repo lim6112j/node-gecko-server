@@ -17,7 +17,8 @@ const minioClient = new Minio.Client({
     endPoint: 'nstorage',
     port: 9000,
     accessKey: 'lim6112j',
-    secretKey: 'gogosin0'
+    secretKey: 'gogosin0',
+    useSSL: false,
 });
 var file = '/home/ubuntu/start.sh';
 var metaData = {
