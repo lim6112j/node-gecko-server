@@ -26,10 +26,10 @@ var metaData = {
     'X-amx-Meta-Testing': 1234,
     'example': 5678
 };
-minioClient.fPutObject('images', 'startback.sh', file, metaData, function (err, etag) {
-    if (err) return console.log(err);
-    console.log("File uploaded successfully");
-});
+//minioClient.fPutObject('images', 'startback.sh', file, metaData, function (err, etag) {
+//if (err) return console.log(err);
+//console.log("File uploaded successfully");
+//});
 MySQLConnector.init();
 app.use(compression());
 app.use(helmet());
