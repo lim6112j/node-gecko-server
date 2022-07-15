@@ -9,7 +9,7 @@ import routes from './api/routes';
 //import logger from './api/middlewares/logger.middleware';
 //import errorHandler from './api/middlewares/error-handler.middleware';
 import * as MySQLConnector from './api/utils/mysql.connector';
-import Minio from 'minio';
+import * as Minio from 'minio';
 
 const app = express();
 const port = 3200;
