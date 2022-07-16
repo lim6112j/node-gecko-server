@@ -5,7 +5,7 @@ import * as GeckoService from './geckos.service';
 export const getGeckos: RequestHandler = async (req: Request, res: Response) => {
     try {
         const geckos = await GeckoService.getGeckos();
-        res.status(200).json({ geckos });
+        res.status(200).json( geckos );
     } catch (error) {
         console.error("[geckos.controller][getGeckos][Error] ", typeof error === 'object' ? JSON.stringify(error) : error);
         res.status(500).json({
@@ -17,7 +17,7 @@ export const getGeckos: RequestHandler = async (req: Request, res: Response) => 
 export const getGeckoById: RequestHandler = async (req: Request, res: Response) => {
     try {
         const gecko = await GeckoService.getGeckoById(+req.params.id);
-        res.status(200).json({ gecko });
+        res.status(200).json( ...gecko );
     } catch (error) {
         console.error('[geckos.controller][getGeckoById][Error] ', typeof error === 'object' ? JSON.stringify(error) : error);
         res.status(500).json({
