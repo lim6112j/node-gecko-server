@@ -36,7 +36,7 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use('/api/', routes);
+app.use('/', routes);
 app.listen(port, () => {
     console.log(`gecko server run on Port : ${port}`)
 });
