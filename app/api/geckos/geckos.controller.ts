@@ -17,7 +17,7 @@ export const getGeckos: RequestHandler = async (req: Request, res: Response) => 
 export const getGeckoById: RequestHandler = async (req: Request, res: Response) => {
     try {
         const gecko = await GeckoService.getGeckoById(+req.params.id);
-        res.status(200).json( ...gecko );
+        res.status(200).json( gecko[0] );
     } catch (error) {
         console.error('[geckos.controller][getGeckoById][Error] ', typeof error === 'object' ? JSON.stringify(error) : error);
         res.status(500).json({
