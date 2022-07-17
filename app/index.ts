@@ -26,9 +26,13 @@ var metaData = {
     'X-amx-Meta-Testing': 1234,
     'example': 5678
 };
-minioClient.fPutObject('images', 'startback1.sh', file, metaData, function (err, etag) {
-    if (err) return console.log(err);
-    console.log("File uploaded successfully : ", etag);
+//minioClient.fPutObject('images', 'startback1.sh', file, metaData, function (err, etag) {
+//if (err) return console.log(err);
+//console.log("File uploaded successfully : ", etag);
+//});
+var presignedUrl = minioClient.presignedGetObject('images', 'gecko.jpeg', 1000, function (e, presignedUrl) {
+    if (e) return console.log(e);
+    console.log(presignedUrl);
 });
 MySQLConnector.init();
 app.use(compression());
