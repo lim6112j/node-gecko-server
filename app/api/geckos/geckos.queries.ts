@@ -10,10 +10,7 @@ FROM geckodb.geckos
 WHERE
 id = ?
 `,
-    AddGecko: `
-INSERT INTO geckodb.geckos (name, age, origin, color, desc, father, mother, thumbnail, images, ancestry)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-`,
+    AddGecko: "INSERT INTO geckodb.geckos (name, age, origin, color, `desc`, father, mother, thumbnail, images, ancestry) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
     UpdateGeckoById: `
 UPDATE geckodb.geckos
 SET name = ?,
